@@ -5,6 +5,7 @@ from io import BytesIO
 import pyimgur
 import boto3
 import botocore
+import os
 
 
 def lambda_handler(event, context):
@@ -77,17 +78,12 @@ def lambda_handler(event, context):
     new_vertical_image.save('/tmp/verticalImage.png',
                             format='PNG', subsampling=0, quality=100)
 
-    IMGUR_CLIENT_ID = "547bfc3385984cf"
-    IMGUR_CLIENT_SECRET = "8fc777ad3cf86038c69f5bc572974b666b388394"
+    LAMBDA_IMGUR_CLIENT_ID = os.environ['IMGUR_CLIENT_ID']
 
-    imgur_object = pyimgur.Imgur(IMGUR_CLIENT_ID)
+    imgur_object = pyimgur.Imgur(LAMBDA_IMGUR_CLIENT_ID)
 
     uploaded_image = imgur_object.upload_image(
         "/tmp/verticalImage.png", title="Made with hypemoji.surge.sh")
-    # print(uploaded_image.title)
-    # print(uploaded_image.link)
-    # print(uploaded_image.size)
-    # print(uploaded_image.type)
 
     # TODO implement
     return {
