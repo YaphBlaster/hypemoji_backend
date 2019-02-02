@@ -27,7 +27,7 @@ def lambda_handler(event, context):
         print("Error: ", e)
 
     # use a truetype font
-    font = ImageFont.truetype('/tmp/font.ttf', 36)
+    font = ImageFont.truetype('/tmp/font.ttf', 22)
 
     widths, heights = zip(*(i.size for i in images))
 
@@ -48,21 +48,13 @@ def lambda_handler(event, context):
         newWidth = (398-w)/2
         newHeight = (350-h)
         newText = list_text[index].upper()
-        draw.text((newWidth-1, newHeight-1),
-                  newText, font=font, fill=border_color)
         draw.text((newWidth+1, newHeight-1),
                   newText, font=font, fill=border_color)
         draw.text((newWidth-1, newHeight+1),
                   newText, font=font, fill=border_color)
         draw.text((newWidth+1, newHeight+1),
                   newText, font=font, fill=border_color)
-        draw.text((newWidth-2, newHeight-2),
-                  newText, font=font, fill=border_color)
-        draw.text((newWidth+2, newHeight-2),
-                  newText, font=font, fill=border_color)
-        draw.text((newWidth-2, newHeight+2),
-                  newText, font=font, fill=border_color)
-        draw.text((newWidth+2, newHeight+2),
+        draw.text((newWidth-1, newHeight-1),
                   newText, font=font, fill=border_color)
         draw.text(((398-w)/2, (350-h)),
                   newText, font=font, fill=(255, 255, 255, 255))
